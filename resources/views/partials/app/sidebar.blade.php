@@ -10,17 +10,38 @@
                 <li class="@if (Request::segment(1) == '') active bg-gradient-primary @endif">
                     <a href="{{ route('home') }}">
                         <i class="fas fa-chart-line"></i>
-                        Data Dashboard
+                        Dashboard
                     </a>
                 </li>
-                <li class="has-sub">
+                <li class="has-sub @if (Request::segment(1) == 'company') active bg-gradient-primary @endif">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-tachometer-alt"></i>
                         Company
                     </a>
                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li class="@if (Request::segment(1) == 'company') active bg-gradient-primary @endif">
-                            <a href="{{ route('company.index') }}">Table</a>
+                        <li class="@if (Request::segment(2) == 'index') active bg-gradient-primary @endif">
+                            <a href="{{ route('company.index') }}">Index</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li class="@if (Request::segment(2) == 'add') active bg-gradient-primary @endif">
+                            <a href="{{ route('company.add') }}">Add</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-sub @if (Request::segment(1) == 'employee') active bg-gradient-primary @endif">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Employee
+                    </a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li class="@if (Request::segment(2) == 'index') active bg-gradient-primary @endif">
+                            <a href="{{ route('employee.index') }}">Index</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li class="@if (Request::segment(2) == 'add') active bg-gradient-primary @endif">
+                            <a href="{{ route('employee.add') }}">Add</a>
                         </li>
                     </ul>
                 </li>
