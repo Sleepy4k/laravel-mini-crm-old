@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Page;
 
-use App\Models\User;
+use App\Models\Employees;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,12 +15,12 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $companies = User::paginate(10);
+        $employees = Employees::paginate(10);
         $paths = [
-          "Company",
+          "Employee",
           "Index"  
         ];
-        return view('admin.company.index', compact("companies", "paths"));
+        return view('admin.company.index', compact("employees", "paths"));
     }
 
     /**
@@ -31,7 +31,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $paths = [
-            "Company",
+            "Employee",
             "Add" 
         ];
         return view('admin.company.add', compact("paths"));
