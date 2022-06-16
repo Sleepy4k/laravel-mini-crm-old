@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\Page\CompanyController;
+use App\Http\Controllers\Page\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
