@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Page;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Companies;
 
 class EmployeeController extends Controller
 {
@@ -15,12 +16,17 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employees::paginate(10);
-        $paths = [
-          "Employee",
-          "Index"  
+        $employees = Employees::latest()->paginate(10);
+        $data = [
+            $title = "Employee",
+            $paths = [
+                "Home",
+                "Employee",
+                "Index"  
+            ]
         ];
-        return view('admin.company.index', compact("employees", "paths"));
+
+        return view('admin.employee.index', compact("employees","data"));
     }
 
     /**
@@ -30,11 +36,17 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $paths = [
-            "Employee",
-            "Add" 
+        $companies = Companies::get();
+        $data = [
+            $title = "Employee",
+            $paths = [
+                "Home",
+                "Employee",
+                "Add" 
+            ]
         ];
-        return view('admin.company.add', compact("paths"));
+
+        return view('admin.employee.add', compact("companies","data"));
     }
 
     /**
@@ -43,20 +55,22 @@ class EmployeeController extends Controller
      * @param  \App\Http\Requests\StoreAboutRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, )
     {
-        // 
-    }
+        $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'company' => 'required|max:255',
+            'email' => 'required|max:255',
+            'phone' => 'required|max:255'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\About  $about
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $input = $request->only("first_name", "last_name", "company", "email", "phone");
+        
+        $Employee = Employees::create($input);
+        $Employee->save();
+
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -67,7 +81,19 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        // 
+        $companies = Companies::get();
+        $employee = Employees::findOrFail($id);
+        $data = [
+            $title = "Employee",
+            $paths = [
+                "Home",
+                "Employee",
+                "Edit" 
+            ],
+            $uid = $id
+        ];
+
+        return view('admin.employee.edit', compact("companies","employee","data"));
     }
 
     /**
@@ -79,7 +105,21 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // 
+        $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'company' => 'required|max:255',
+            'email' => 'required|max:255',
+            'phone' => 'required|max:255'
+        ]);
+
+        $input = $request->only("first_name", "last_name", "company", "email", "phone");
+        
+        $Employee = Employees::findOrFail($id);
+        $Employee->update($input);
+        $Employee->save();
+
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -90,6 +130,9 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        // 
+        $Employee = Employees::findOrFail($id);
+        $Employee->delete();
+
+        return redirect()->route('employee.index');
     }
 }
