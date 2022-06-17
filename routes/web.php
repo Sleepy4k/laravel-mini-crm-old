@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\Page\CompanyController;
 use App\Http\Controllers\Page\EmployeeController;
+use App\Http\Controllers\System\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,10 +76,6 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth']], function () {
     )->name('employee.store');
 });
 
-// Route::group(['prefix' => 'contact', 'middleware' => ['auth']], function () {
-//     route::get('index', [ContactController::class, 'index'])->name('contact.index');
-//     route::get('{id}/edit', [ContactController::class, 'edit'])->name('contact.edit');
-//     route::get('{id}/destroy', [ContactController::class, 'destroy'])->name('contact.destroy');
-
-//     route::post('{id}/update', [ContactController::class, 'update'])->name('contact.update');
-// });
+Route::group(['prefix' => 'system', 'middleware' => ['auth']], function () {
+    route::get('activity', [ActivityController::class, 'index'])->name('activity.index');
+});

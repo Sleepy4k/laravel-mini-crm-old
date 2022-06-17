@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-12">
                 <div class="table-responsive m-b-40 pt-5">
-                    @include('partials.app.table.company')
+                    @include('partials.system.table.activity')
                 </div>
             </div>
             @include('partials.app.footer')

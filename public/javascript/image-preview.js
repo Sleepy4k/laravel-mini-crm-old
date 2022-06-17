@@ -1,5 +1,5 @@
 function previewImage() {
-    const image = document.querySelector('#image');
+    const image = document.querySelector('#logo');
     const imgPreview = document.querySelector('.img-preview');
 
     imgPreview.style.display = 'block';

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Page;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
@@ -24,6 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin/main/home');
+        $data = [
+            $title = "Dashboard",
+            $paths = [
+                "Home",
+                "Dashboard"
+            ]
+        ];
+        return view('admin.main.home', compact("data"));
     }
 }

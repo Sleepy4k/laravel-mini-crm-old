@@ -3,7 +3,7 @@
 @section('content')
     <div class="main-content">
         <div class="section__content section__content--p30">
-            <div class="container-fluid">
+            <div class="container-fluid pb-4">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="overview-wrap">
@@ -16,12 +16,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="table-responsive m-b-40 pt-5">
-                    @include('partials.app.table.company')
+            <div class="card">
+                <div class="card-header">
+                    <strong>
+                        Edit Data
+                    </strong>
+                </div>
+                <div class="card-body card-block">
+                    @include('partials.app.form.employee_edit')
                 </div>
             </div>
-            @include('partials.app.footer')
         </div>
+        @include('partials.app.footer')
     </div>
 @endsection
