@@ -1,10 +1,10 @@
-<form action="{{ route('employee.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('employee.update', $data[2]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         <label class=" form-control-label">
             First Name
         </label>
-        <input type="text" name="first_name" class="@error('first_name') is-invalid @enderror form-control" value="{{ old('first_name') }}" required autofocus>
+        <input type="text" name="first_name" class="@error('first_name') is-invalid @enderror form-control" value="{{ old('first_name', $employee->first_name) }}" required autofocus>
     </div>
 
     @error('first_name')
@@ -17,7 +17,7 @@
         <label class=" form-control-label">
             Last Name
         </label>
-        <input type="text" name="last_name" class="@error('last_name') is-invalid @enderror form-control" value="{{ old('last_name') }}" required autofocus>
+        <input type="text" name="last_name" class="@error('last_name') is-invalid @enderror form-control" value="{{ old('last_name', $employee->last_name) }}" required autofocus>
     </div>
 
     @error('last_name')
@@ -33,7 +33,7 @@
 
         <select name="company" id="company" class="form-control-sm form-control">
             @foreach($companies as $company)
-                <option value="{{ $company->name }}">
+                <option value="{{ $company->name }}" @if($company->name == $employee->company) selected @endif>
                     {{ $company->name }}
                 </option>
             @endforeach
@@ -50,7 +50,7 @@
         <label class=" form-control-label">
             Email
         </label>
-        <input type="text" name="email" class="@error('email') is-invalid @enderror form-control" value="{{ old('email') }}" required autofocus>
+        <input type="text" name="email" class="@error('email') is-invalid @enderror form-control" value="{{ old('email', $employee->email) }}" required autofocus>
     </div>
 
     @error('email')
@@ -63,7 +63,7 @@
         <label class=" form-control-label">
             Phone
         </label>
-        <input type="text" name="phone" class="@error('phone') is-invalid @enderror form-control" value="{{ old('phone') }}" required autofocus>
+        <input type="text" name="phone" class="@error('phone') is-invalid @enderror form-control" value="{{ old('phone', $employee->phone) }}" required autofocus>
     </div>
 
     @error('phone')
