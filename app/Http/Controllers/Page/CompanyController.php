@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Page;
 
-use App\Models\User;
+use App\Models\Companies;
 use Illuminate\Http\Request;
+use App\Http\Traits\CompanyTrait;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 
 class CompanyController extends Controller
 {
+    use CompanyTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +19,17 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = User::paginate(10);
-        $paths = [
-          "Company",
-          "Index"  
+        $companies = Companies::latest()->paginate(10);
+        $data = [
+            $title = "Company",
+            $paths = [
+                "Home",
+                "Company",
+                "Index"  
+            ]
         ];
-        return view('admin.company.index', compact("companies", "paths"));
+
+        return view('admin.company.index', compact("companies","data"));
     }
 
     /**
@@ -30,11 +39,16 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $paths = [
-            "Company",
-            "Add" 
+        $data = [
+            $title = "Company",
+            $paths = [
+                "Home",
+                "Company",
+                "Add" 
+            ]
         ];
-        return view('admin.company.add', compact("paths"));
+
+        return view('admin.company.add', compact("data"));
     }
 
     /**
@@ -45,18 +59,28 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        // 
-    }
+        $request->validate([
+            'name' => 'required|max:255|unique:companies',
+            'email' => 'required|max:255|email:dns',
+            'logo' => 'required|image|mimes:jpg,png,jpeg,svg|max:4092|dimensions:min_width=100,min_height=100',
+            'website' => 'required|max:255'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\About  $about
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $input = $request->only("name", "email", 'logo', "website");
+
+        if($request->file('logo')) {
+            $path_dir = 'public/images';
+            $input['logo'] = $this->save_file(
+                $path_dir,
+                $request->file('logo')->getClientOriginalName(),
+            );
+            $request->file('logo')->storeAs($path_dir, $input['logo']);
+        }
+
+        $Company = Companies::create($input);
+        $Company->save();
+
+        return redirect()->route('company.index')->with('status', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -67,7 +91,19 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        // 
+        $company = Companies::findOrFail($id);
+
+        $data = [
+            $title = "Company",
+            $paths = [
+                "Home",
+                "Company",
+                "Edit" 
+            ],
+            $uid = $id
+        ];
+
+        return view('admin.company.edit', compact("company","data"));
     }
 
     /**
@@ -79,7 +115,33 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // 
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255|email:dns',
+            'logo' => 'image|mimes:jpg,png,jpeg,svg|max:4092',
+            'website' => 'required|max:255'
+        ]);
+
+        $input = $request->only("name", "email", 'logo', "website");
+
+        if($request->file('logo')) {
+            $old_path = public_path('storage/images/'.$request->old_logo);
+            if(File::exists($old_path)) {
+                File::delete($old_path);
+            };
+            $path_dir = 'public/images';
+            $input['logo'] = $this->save_file(
+                $path_dir,
+                $request->file('logo')->getClientOriginalName(),
+            );
+            $request->file('logo')->storeAs($path_dir, $input['logo']);
+        }
+
+        $Company = Companies::findOrFail($id);
+        $Company->update($input);
+        $Company->save();
+        
+        return redirect()->route('company.index')->with('status', 'Data berhasil diubah');
     }
 
     /**
@@ -90,6 +152,11 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        // 
+        $Company = Companies::findOrFail($id);
+        $Company->delete();
+
+        File::delete(public_path('storage/images/'.$Company->logo));
+
+        return redirect()->route('company.index');
     }
 }
