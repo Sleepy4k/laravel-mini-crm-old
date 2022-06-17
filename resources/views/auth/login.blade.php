@@ -10,13 +10,5 @@
     </div>
     <div class="login-form">
         @include('partials.auth.form.login')
-        <div class="register-link">
-            <p>
-                Don't you have account?
-                <a href="{{route('register') }}">
-                    Sign Up
-                </a>
-            </p>
-        </div>
     </div>
 @endsection
