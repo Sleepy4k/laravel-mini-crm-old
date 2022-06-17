@@ -1,5 +1,5 @@
 <h1 align='center'>
-    Laravel Portofolio
+    Laravel Mini CRM
 </h1>
 
 <p align='center'>
