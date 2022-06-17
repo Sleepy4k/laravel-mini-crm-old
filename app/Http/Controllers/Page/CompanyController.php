@@ -125,7 +125,7 @@ class CompanyController extends Controller
 
         $input = $request->only("name", "email", "logo", "website");
 
-        if($request->file("logo")) {
+        if ($request->file("logo")) {
             $old_path = public_path("storage/images/".$request->old_logo);
 
             if(File::exists($old_path)) {
@@ -133,13 +133,14 @@ class CompanyController extends Controller
             };
 
             $path_dir = "public/images";
+            $file = $request->file("logo");
 
             $input["logo"] = $this->save_file(
                 $path_dir,
-                $request->file("logo")->getClientOriginalName(),
+                $file->getClientOriginalName(),
             );
 
-            $request->file("logo")->storeAs($path_dir, $input["logo"]);
+            $file->storeAs($path_dir, $input["logo"]);
         }
 
         Companies::findOrFail($id)->update($input)->save();
@@ -155,7 +156,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $company = Companies::findOrFail($id)->delete();
+        $company = Companies::findOrFail($id);
+        $company->delete();
 
         File::delete(public_path("storage/images/".$company->logo));
 
