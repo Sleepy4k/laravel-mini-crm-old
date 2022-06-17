@@ -15,15 +15,27 @@ class CompaniesSeeder extends Seeder
     public function run()
     {
         $date = date("Y/m/d H:i:s");
-        $companies = [
-            'name' => "NKCore",
-            'email' => 'NKCore@google.com',
-            'logo' => "company.png",
-            'website' => "benjamin4k.my.id",
-            'created_at' => $date,
-            'updated_at' => $date
+        $data = [
+            [
+                'name' => "Facebook",
+                'email' => 'facebook@google.com',
+                'logo' => "company.png",
+                'website' => "https://www.facebook.com/",
+                'created_at' => $date,
+                'updated_at' => $date
+            ],
+            [
+                'name' => "Google",
+                'email' => 'google@google.co.id',
+                'logo' => "company.png",
+                'website' => "https://www.google.com/",
+                'created_at' => $date,
+                'updated_at' => $date
+            ]
         ];
 
-        Companies::create($companies);
+        foreach ($data as $company) {
+            Companies::create($company);
+        };
     }
 }

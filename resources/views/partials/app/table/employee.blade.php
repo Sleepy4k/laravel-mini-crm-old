@@ -1,7 +1,7 @@
 <a href="{{ route('employee.add') }}" class="table-data__tool-right">
     <button class="au-btn au-btn-icon au-btn--green au-btn--small">
         <i class="zmdi zmdi-plus"></i>
-        add item
+        Add Item
     </button>
 </a>
 
@@ -32,14 +32,14 @@
         </tr>
     </thead>
     <tbody>
-        @if(count($employees) <= 0)
+        @if (count($employees) <= 0)
             <tr>
                 <td colspan=7 style="text-align: center;"> 
                     Belum Ada Data Yang Tersedia 
                 </td>
             </tr>
         @else
-            @foreach($employees as $index => $employee)
+            @foreach ($employees as $index => $employee)
                 <tr class="tr-shadow">
                     <td>
                         {{ $index + 1 }}

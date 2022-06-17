@@ -5,7 +5,7 @@
 @section('body')
     <div class="login-logo">
         <a href="{{ route('login') }}">
-            <img src="{{asset('admin/images/icon/logo.png')}}" alt="CoolAdmin">
+            <img src="{{asset('admin/images/icon/logo.png')}}" alt="Benjamin4k">
         </a>
     </div>
     <div class="login-form">

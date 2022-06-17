@@ -8,7 +8,7 @@
                     <div class="col-md-12">
                         <div class="overview-wrap">
                             <h2 class="title-5">
-                                @foreach($data[1] as $path)
+                                @foreach ($data[1] as $path)
                                     {{ $path }} /
                                 @endforeach
                             </h2>

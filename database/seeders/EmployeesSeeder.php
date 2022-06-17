@@ -15,16 +15,29 @@ class EmployeesSeeder extends Seeder
     public function run()
     {
         $date = date("Y/m/d H:i:s");
-        $employees = [
-            'first_name' => "Apri",
-            'last_name' => 'Pandu',
-            'company' => "NKCore",
-            'email' => "pandu300478@gmail.com",
-            "phone" => "6281318977078",
-            'created_at' => $date,
-            'updated_at' => $date
+        $data = [
+            [
+                'first_name' => "Apri",
+                'last_name' => 'Pandu',
+                'company' => "Facebook",
+                'email' => "pandu300478@gmail.com",
+                "phone" => "6281318977078",
+                'created_at' => $date,
+                'updated_at' => $date
+            ],
+            [
+                'first_name' => "Benjamin",
+                'last_name' => 'Kregor',
+                'company' => "Google",
+                'email' => "benjaminkregor@gmail.com",
+                "phone" => "628211762341",
+                'created_at' => $date,
+                'updated_at' => $date
+            ]
         ];
 
-        Employees::create($employees);
+        foreach ($data as $employee) {
+            Employees::create($employee);
+        };
     }
 }

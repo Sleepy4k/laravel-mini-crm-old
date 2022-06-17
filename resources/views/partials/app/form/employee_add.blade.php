@@ -32,7 +32,7 @@
         </label>
 
         <select name="company" id="company" class="form-control-sm form-control">
-            @foreach($companies as $company)
+            @foreach ($companies as $company)
                 <option value="{{ $company->name }}">
                     {{ $company->name }}
                 </option>
