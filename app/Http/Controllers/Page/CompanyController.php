@@ -119,7 +119,7 @@ class CompanyController extends Controller
         $request->validate([
             "name" => "required|max:255",
             "email" => "required|max:255|email:dns",
-            "logo" => "image|mimes:jpg,png,jpeg,svg|max:4092",
+            "logo" => "image|mimes:jpg,png,jpeg,svg|max:4092|dimensions:min_width=100,min_height=100",
             "website" => "required|max:255"
         ]);
 
