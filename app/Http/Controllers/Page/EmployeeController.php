@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Page;
 
 use App\Models\Employees;
+use App\Models\Companies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Companies;
 
 class EmployeeController extends Controller
 {
@@ -26,7 +26,7 @@ class EmployeeController extends Controller
             ]
         ];
 
-        return view('admin.employee.index', compact("employees","data"));
+        return view("admin.employee.index", compact("employees", "data"));
     }
 
     /**
@@ -46,7 +46,7 @@ class EmployeeController extends Controller
             ]
         ];
 
-        return view('admin.employee.add', compact("companies","data"));
+        return view("admin.employee.add", compact("companies", "data"));
     }
 
     /**
@@ -58,19 +58,18 @@ class EmployeeController extends Controller
     public function store(Request $request, )
     {
         $request->validate([
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'company' => 'required|max:255',
-            'email' => 'required|max:255',
-            'phone' => 'required|max:255'
+            "first_name" => "required|max:255",
+            "last_name" => "required|max:255",
+            "company" => "required|max:255",
+            "email" => "required|max:255",
+            "phone" => "required|max:255"
         ]);
 
         $input = $request->only("first_name", "last_name", "company", "email", "phone");
         
-        $Employee = Employees::create($input);
-        $Employee->save();
+        Employees::create($input)->save();
 
-        return redirect()->route('employee.index');
+        return redirect()->route("employee.index");
     }
 
     /**
@@ -93,7 +92,7 @@ class EmployeeController extends Controller
             $uid = $id
         ];
 
-        return view('admin.employee.edit', compact("companies","employee","data"));
+        return view("admin.employee.edit", compact("companies","employee","data"));
     }
 
     /**
@@ -106,20 +105,18 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'company' => 'required|max:255',
-            'email' => 'required|max:255',
-            'phone' => 'required|max:255'
+            "first_name" => "required|max:255",
+            "last_name" => "required|max:255",
+            "company" => "required|max:255",
+            "email" => "required|max:255",
+            "phone" => "required|max:255"
         ]);
 
         $input = $request->only("first_name", "last_name", "company", "email", "phone");
         
-        $Employee = Employees::findOrFail($id);
-        $Employee->update($input);
-        $Employee->save();
+        Employees::findOrFail($id)->update($input)->save();
 
-        return redirect()->route('employee.index');
+        return redirect()->route("employee.index");
     }
 
     /**
@@ -130,9 +127,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $Employee = Employees::findOrFail($id);
-        $Employee->delete();
+        Employees::findOrFail($id)->delete();
 
-        return redirect()->route('employee.index');
+        return redirect()->route("employee.index");
     }
 }

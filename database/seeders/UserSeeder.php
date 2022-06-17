@@ -15,14 +15,18 @@ class UserSeeder extends Seeder
     public function run()
     {
         $date = date("Y/m/d H:i:s");
-        $users = [
-            'name' => 'admin',
-            'password' => bcrypt('admin123'),
-            'email' => 'admin@admin.com',
-            'created_at' => $date,
-            'updated_at' => $date
+        $data = [
+            [
+                'name' => 'admin',
+                'password' => bcrypt('admin123'),
+                'email' => 'admin@admin.com',
+                'created_at' => $date,
+                'updated_at' => $date
+            ]
         ];
 
-        User::create($users);
+        foreach ($data as $user) {
+            User::create($user);
+        };
     }
 }

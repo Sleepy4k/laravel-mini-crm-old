@@ -29,14 +29,14 @@
         </tr>
     </thead>
     <tbody>
-        @if(count($companies) <= 0)
+        @if (count($companies) <= 0)
             <tr>
                 <td colspan=6 style="text-align: center;"> 
                     Belum Ada Data Yang Tersedia 
                 </td>
             </tr>
         @else
-            @foreach($companies as $index => $company)
+            @foreach ($companies as $index => $company)
                 <tr class="tr-shadow">
                     <td>
                         {{ $index + 1 }}
@@ -52,7 +52,7 @@
                     <td class="desc">
                         {{ $company->website }}
                     </td>
-                    @if(!empty(file_exists('storage/images/'.$company->logo)))
+                    @if (!empty(file_exists('storage/images/'.$company->logo)))
                         <td>
                             <img height="35px" width="35px" src="{{ asset('storage/images/'.$company->logo) }}"/>
                         </td>

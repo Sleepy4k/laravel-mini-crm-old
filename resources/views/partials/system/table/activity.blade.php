@@ -28,14 +28,14 @@
         </tr>
     </thead>
     <tbody>
-        @if(count($activities) <= 0)
+        @if (count($activities) <= 0)
             <tr>
                 <td colspan=8 style="text-align: center;"> 
                     Belum Ada Data Yang Tersedia 
                 </td>
             </tr>
         @else
-            @foreach($activities as $index => $activity)
+            @foreach ($activities as $index => $activity)
                 <tr class="tr-shadow">
                     <td>
                         {{ $index + 1 }}
@@ -47,26 +47,26 @@
                         {{ $activity->description }}
                     </td>
                     <td>
-                        @if($activity->subject_id)
+                        @if ($activity->subject_id)
                             {{ $activity->subject_id }}
                         @else
                             -
                         @endif
                         |
-                        @if($activity->subject_type)
+                        @if ($activity->subject_type)
                             {{ $activity->subject_type }}
                         @else
                             -
                         @endif
                     </td>
                     <td>
-                        @if($activity->causer_id)
+                        @if ($activity->causer_id)
                             {{ $activity->causer_id }}
                         @else
                             -
                         @endif
                         |
-                        @if($activity->causer_type)
+                        @if ($activity->causer_type)
                             {{ $activity->causer_type }}
                         @else
                             -

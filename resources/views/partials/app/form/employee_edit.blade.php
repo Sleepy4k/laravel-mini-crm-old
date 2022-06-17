@@ -32,8 +32,8 @@
         </label>
 
         <select name="company" id="company" class="form-control-sm form-control">
-            @foreach($companies as $company)
-                <option value="{{ $company->name }}" @if($company->name == $employee->company) selected @endif>
+            @foreach ($companies as $company)
+                <option value="{{ $company->name }}" @if ($company->name == $employee->company) selected @endif>
                     {{ $company->name }}
                 </option>
             @endforeach

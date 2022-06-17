@@ -33,8 +33,8 @@
 
         <input type="hidden" name="old_logo" id="old_logo" value="{{ $company->logo }}">
 
-        @if($company->logo)
-            @if(!empty(file_exists('storage/images/'.$company->logo)))
+        @if ($company->logo)
+            @if (!empty(file_exists('storage/images/'.$company->logo)))
                 <img src="{{ asset('storage/images/'.$company->logo) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block" style="max-width: 15em; max-height: 15em;">
             @else
                 <img src="{{ asset('storage/images/logo-404.png') }}" class="img-preview img-fluid mb-3 col-sm-5 d-block" style="max-width: 15em; max-height: 15em;">
