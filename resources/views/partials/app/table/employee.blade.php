@@ -1,4 +1,4 @@
-<a href="{{ route('company.add') }}" class="table-data__tool-right">
+<a href="{{ route('employee.add') }}" class="table-data__tool-right">
     <button class="au-btn au-btn-icon au-btn--green au-btn--small">
         <i class="zmdi zmdi-plus"></i>
         add item
@@ -12,16 +12,19 @@
                 Index
             </th>
             <th>
-                Name
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Company
             </th>
             <th>
                 Email
             </th>
             <th>
-                Website
-            </th>
-            <th>
-                Logo
+                Phone
             </th>
             <th style="text-align: center;">
                 Action
@@ -29,46 +32,43 @@
         </tr>
     </thead>
     <tbody>
-        @if(count($companies) <= 0)
+        @if(count($employees) <= 0)
             <tr>
-                <td colspan=6 style="text-align: center;"> 
+                <td colspan=7 style="text-align: center;"> 
                     Belum Ada Data Yang Tersedia 
                 </td>
             </tr>
         @else
-            @foreach($companies as $index => $company)
+            @foreach($employees as $index => $employee)
                 <tr class="tr-shadow">
                     <td>
                         {{ $index + 1 }}
                     </td>
                     <td>
-                        {{ $company->name }}
+                        {{ $employee->first_name }}
+                    </td>
+                    <td>
+                        {{ $employee->last_name }}
                     </td>
                     <td>
                         <span class="block-email">
-                            {{ $company->email }}
+                            {{ $employee->company }}
                         </span>
                     </td>
                     <td class="desc">
-                        {{ $company->website }}
+                        {{ $employee->email }}
                     </td>
-                    @if(!empty(file_exists('storage/images/'.$company->logo)))
-                        <td>
-                            <img height="35px" width="35px" src="{{ asset('storage/images/'.$company->logo) }}"/>
-                        </td>
-                    @else
-                        <td>
-                            <img height="35px" width="35px" src="{{ asset('storage/images/logo-404.png') }}"/>
-                        </td>
-                    @endif
+                    <td>
+                        {{ $employee->phone }}
+                    </td>
                     <td>
                         <div class="table-data-feature">
-                            <a href="{{ route('company.edit', $company->id) }}">
+                            <a href="{{ route('employee.edit', $employee->id) }}">
                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button>
                             </a>
-                            <a href="{{ route('company.delete', $company->id) }}" class="delete-confirm">
+                            <a href="{{ route('employee.delete', $employee->id) }}" class="delete-confirm">
                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
@@ -82,4 +82,4 @@
     </tbody>
 </table>
 
-{{ $companies->links() }}
+{{ $employees->links() }}
