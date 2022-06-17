@@ -23,11 +23,6 @@
                             <a href="{{ route('company.index') }}">Index</a>
                         </li>
                     </ul>
-                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li class="@if (Request::segment(2) == 'add') active bg-gradient-primary @endif">
-                            <a href="{{ route('company.add') }}">Add</a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="has-sub @if (Request::segment(1) == 'employee') active bg-gradient-primary @endif">
                     <a class="js-arrow" href="#">
@@ -39,9 +34,15 @@
                             <a href="{{ route('employee.index') }}">Index</a>
                         </li>
                     </ul>
+                </li>
+                <li class="has-sub @if (Request::segment(1) == 'system') active bg-gradient-primary @endif">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-tachometer-alt"></i>
+                        System
+                    </a>
                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li class="@if (Request::segment(2) == 'add') active bg-gradient-primary @endif">
-                            <a href="{{ route('employee.add') }}">Add</a>
+                        <li class="@if (Request::segment(2) == 'activity') active bg-gradient-primary @endif">
+                            <a href="{{ route('activity.index') }}">Audit Log</a>
                         </li>
                     </ul>
                 </li>
